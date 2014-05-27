@@ -1,6 +1,9 @@
 modules = {
 	'xml-forms' {
 		dependsOn 'dialog,dialog-dataTables,dialog-altselect,dialog-ckeditor,dialog-codemirror,bootstrap-css,bootstrap-tooltip,bootstrap-popover,bootstrap-modal'
+		resource url:'js/jquery/jSignature.min.js'
+		resource url:'js/jquery/jquery.blockUI.js'
+		resource url:'js/jquery/spin.min.js'
 		resource url:'js/xml-forms.js'
 		resource url:'css/xml-forms.css'
 		resource url:'js/jquery/jquery.validate.pack.js'

@@ -25,7 +25,8 @@ if (!window.xmlforms) {
         currentForm : {
             submitted:false,
             form:null,
-            dialog:null
+            dialog:null,
+            spinner:null
         }
     };
 }
@@ -402,6 +403,56 @@ xmlforms.resizeDialog = function () {
     $(xmlforms.currentForm.dialog).find('.modal-body .tab-content').css({
         maxHeight: (windowHeight * 0.9) - 136 - ($(xmlforms.currentForm.dialog).find('.modal-body fieldset').height() - $(xmlforms.currentForm.dialog).find('.modal-body .tab-content').height())
     });
+}
+
+xmlforms.startSpinner = function () {
+    var opts = {
+        lines: 13, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 10, // The line thickness
+        radius: 30, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#fff', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+    };
+    var target = document.getElementById('form');
+    xmlforms.currentForm.spinner = new Spinner(opts).spin(target);
+}
+
+xmlforms.stopSpinner = function () {
+    xmlforms.currentForm.spinner.stop();
+}
+
+xmlforms.blockDialog = function (message) {
+    if(typeof(message)==='undefined') message = '';
+
+    $('.modal').block({
+        message: message,
+        applyPlatformOpacityRules: false,
+        centerY: false,
+        css: {
+            'top': '65%',
+            'color': '#eee',
+            'border': '0',
+            'backgroundColor': 'transparant',
+            'font-size': '1.5em'
+        }
+    });
+    xmlforms.startSpinner();
+}
+
+xmlforms.unblockDialog = function () {
+    xmlforms.currentForm.spinner.stop();
+    $('.modal').unblock();
 }
 
 
