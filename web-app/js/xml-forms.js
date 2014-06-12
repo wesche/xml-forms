@@ -319,6 +319,7 @@ xmlforms.formDialog = function (id,controllerName, options ,urlParams) {
                 // TODO use the validate submission callback, see http://jqueryvalidation.org/validate
                 $(this).find('#form').validate({
                     submitHandler: function(form) {
+			xmlforms.blockDialog();
                         submitCallback(form);
                     },
                      invalidHandler: function(event, validator) {
@@ -339,6 +340,7 @@ xmlforms.formDialog = function (id,controllerName, options ,urlParams) {
                                 $("a[href='#" + tab + "']").parent().addClass('alertTab');
                             }
                         }
+			xmlforms.unblockDialog();
                      }
                 });
 
