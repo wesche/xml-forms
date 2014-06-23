@@ -408,6 +408,7 @@ xmlforms.resizeDialog = function () {
 }
 
 xmlforms.startSpinner = function () {
+  if($('form > div.spinner').length == 0) {
     var opts = {
         lines: 13, // The number of lines to draw
         length: 20, // The length of each line
@@ -428,6 +429,7 @@ xmlforms.startSpinner = function () {
     };
     var target = document.getElementById('form');
     xmlforms.currentForm.spinner = new Spinner(opts).spin(target);
+  }
 }
 
 xmlforms.stopSpinner = function () {
